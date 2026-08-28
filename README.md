@@ -1,142 +1,66 @@
-# awesome-Multilingual-Reliability-of-LLMs-in-Scientific-Literature-Analysis
-Curated, verified resources on multilingual LLM reliability in scientific literature analysis
+# Awesome Multilingual LLM Reliability
 
-# Verified Research Papers
+A curated collection of research papers, datasets, tools, implementations, and learning resources on the reliability of large language models (LLMs) when used across languages for scientific literature analysis — including translation, summarization, question answering, and fact verification.
 
-All entries below were checked for correct title, authors, year, venue, and a working DOI/arXiv/publisher link before inclusion. See [`../citation-audit/CITATION_INTEGRITY_AUDIT.md`](../citation-audit/CITATION_INTEGRITY_AUDIT.md) for the verification method and the issues found in the source paper's *in-text* (as opposed to formal-list) citations.
+This repository organizes and extends an earlier AI-assisted research paper on the same topic, together with a citation-integrity audit of that paper's references.
 
 ## Contents
-- [Survey and Review Papers](#survey-and-review-papers)
-- [Foundational Papers](#foundational-papers)
-- [Evaluation Benchmarks](#evaluation-benchmarks)
-- [Applications and Domain Studies](#applications-and-domain-studies)
 
----
+- [Overview](#overview)
+- [AI-Assisted Research Paper](#ai-assisted-research-paper)
+- [Citation Integrity Audit](#citation-integrity-audit)
+- [Curated Research Papers](#curated-research-papers)
+- [Datasets](#datasets)
+- [Tools and Libraries](#tools-and-libraries)
+- [GitHub Implementations](#github-implementations)
+- [Tutorials and Learning Resources](#tutorials-and-learning-resources)
+- [License](#license)
 
-## Survey and Review Papers
+## Overview
 
-- **Survey of Hallucination in Natural Language Generation**
-  Ji, Z., Lee, N., Frieske, R., Yu, T., Su, D., Xu, Y., Ishii, E., Bang, Y. J., Madotto, A., & Fung, P., 2023, ACM Computing Surveys, 55(12), Article 248.
-  [DOI](https://doi.org/10.1145/3571730)
-  Establishes the factuality-vs-faithfulness hallucination taxonomy the paper builds on in Section 2.3.
+Large language models are increasingly used to screen, summarize, translate, and answer questions about scientific literature. Because roughly 98% of indexed scientific output is published in English while most researchers are not native English speakers, multilingual LLMs are often promoted as a route to more equitable access to science. However, reliability is not uniform across languages: benchmarks consistently show that accuracy, factual grounding, and confidence calibration degrade as a model moves from high-resource languages like English or Chinese toward typologically distant or lower-resource languages.
 
-- **A Survey on Hallucination in Large Language Models: Principles, Taxonomy, Challenges, and Open Questions**
-  Huang, L., Yu, W., Ma, W., Zhong, W., Feng, Z., Wang, H., Chen, Q., Peng, W., Feng, X., Qin, B., & Liu, T., 2025, ACM Transactions on Information Systems, 43(2), Article 42.
-  [Publisher page](https://dl.acm.org/journal/tois)
-  Extends the hallucination taxonomy and reviews mitigation strategies across training-time, retrieval-based, and post-hoc correction methods.
+This repository collects the empirical and methodological literature behind that finding. It covers the mechanisms that drive cross-lingual unreliability — translation-induced information loss, uneven pretraining data, and language-specific hallucination patterns — as well as current mitigation strategies such as retrieval-augmented generation, cross-lingual chain-of-thought prompting, and multilingual factuality metrics. It also includes domain-specific evidence from biomedical and general-purpose multilingual benchmarks. The overall conclusion of the underlying research is that targeted interventions narrow the cross-lingual reliability gap for individual tasks, but no current approach eliminates it — which is why every resource collected here was independently verified rather than accepted on the strength of an AI-generated citation.
 
-- **A Survey of Multilingual Large Language Models**
-  Qin, L., Chen, Q., Zhou, Y., Chen, Z., Li, Y., Liao, L., Li, M., Che, W., & Yu, P. S., 2025, Patterns, 6(1), 101118.
-  [DOI](https://doi.org/10.1016/j.patter.2024.101118)
-  Provides the alignment-strategy taxonomy (parameter-, representation-, and prompting-level) used to frame cross-lingual transfer.
+## AI-Assisted Research Paper
 
-- **A Systematic Survey of Text Summarization: From Statistical Methods to Large Language Models**
-  Zhang, H., Yu, P. S., & Zhang, J., 2024, arXiv:2406.11289.
-  [arXiv](https://arxiv.org/abs/2406.11289)
-  Background on summarization methods relevant to cross-lingual scientific summarization pipelines.
+**Evaluating Multilingual Reliability of Large Language Models in Scientific Literature Analysis** — a review of methods, evidence, and open problems in cross-lingual LLM reliability for scientific-literature-facing tasks (translation, summarization, QA, and fact verification).
 
-- **Generative Large Language Models in Automated Fact-Checking: A Survey**
-  Vykopal, I., Pikuliak, M., Ostermann, S., & Šimko, M., 2024, arXiv:2407.02351.
-  [arXiv](https://arxiv.org/abs/2407.02351)
-  Source for the finding that LLM-based fact-verification systems remain biased toward high-resource languages.
+[View Paper](paper/Evaluating_Multilingual_Reliability_of_LLMs_in_Scientific_Literature_Analysis.docx)
 
-## Foundational Papers
+## Citation Integrity Audit
 
-- **mT5: A Massively Multilingual Pre-trained Text-to-Text Transformer**
-  Xue, L., Constant, N., Roberts, A., Kale, M., Al-Rfou, R., Siddhant, A., Barua, A., & Raffel, C., 2021, NAACL-HLT 2021, 483–498.
-  [ACL Anthology](https://aclanthology.org/2021.naacl-main.41/)
-  Early text-to-text multilingual transformer spanning 101 languages; foundational architecture referenced in Section 2.1.
+Every one of the 24 formal references was individually verified for correct title, authors, year, venue, and DOI/arXiv ID against publisher pages, DOI resolution, PubMed, ACL Anthology, arXiv, and dblp. Two entries had real attribution errors (both now corrected in `references/references.md`), and four in-text claims in the source paper cite nothing that exists in its reference list.
 
-- **BLOOM: A 176B-Parameter Open-Access Multilingual Language Model**
-  BigScience Workshop, Le Scao, T., Fan, A., Akiki, C., et al., 2022, arXiv:2211.05100.
-  [DOI](https://doi.org/10.48550/arXiv.2211.05100)
-  Openly released 176B multilingual model covering 46 natural + 13 programming languages, trained via international collaboration.
+[View Audit — Citation_Integrity_Audit.pdf](citation-audit/Citation_Integrity_Audit.pdf) (also available as [Markdown](citation-audit/CITATION_INTEGRITY_AUDIT.md))
 
-- **LLaMA: Open and Efficient Foundation Language Models**
-  Touvron, H., Lavril, T., Izacard, G., Martinet, X., et al., 2023, arXiv:2302.13971.
-  [arXiv](https://arxiv.org/abs/2302.13971)
-  General-purpose model with emergent (not explicitly trained) multilingual competence.
+## Curated Research Papers
 
-- **GPT-4 Technical Report**
-  OpenAI, 2023, arXiv:2303.08774.
-  [DOI](https://doi.org/10.48550/arXiv.2303.08774)
-  Reference model for general-purpose LLM capability discussed throughout the paper.
+24 verified papers, organized by category:
 
-- **Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks**
-  Lewis, P., Perez, E., Piktus, A., Petroni, F., Karpukhin, V., Goyal, N., Küttler, H., Lewis, M., Yih, W., Rocktäschel, T., Riedel, S., & Kiela, D., 2020, NeurIPS 33, 9459–9474.
-  [NeurIPS proceedings](https://proceedings.neurips.cc/paper/2020/hash/6b493230205f780e1bc26945df7481e5-Abstract.html)
-  Originates the RAG architecture proposed in Section 4 as a mitigation for cross-lingual factuality gaps.
+- [Survey and Review Papers](references/references.md#survey-and-review-papers)
+- [Foundational Papers](references/references.md#foundational-papers)
+- [Evaluation Benchmarks](references/references.md#evaluation-benchmarks)
+- [Applications and Domain Studies](references/references.md#applications-and-domain-studies)
 
-## Evaluation Benchmarks
+Full list with authors, venues, DOIs, and one-line relevance notes: [`references/references.md`](references/references.md)
 
-- **XTREME: A Massively Multilingual Multi-Task Benchmark for Evaluating Cross-Lingual Generalization**
-  Hu, J., Ruder, S., Siddhant, A., Neubig, G., Firat, O., & Johnson, M., 2020, ICML 2020, PMLR 119, 4411–4421.
-  [PMLR](https://proceedings.mlr.press/v119/hu20b.html)
-  Early standardized cross-lingual benchmark aggregating QA and structured-prediction tasks.
+## Datasets
 
-- **MMLU-ProX: A Multilingual Benchmark for Advanced Large Language Model Evaluation**
-  Xuan, W., Yang, R., Qi, H., Zeng, Q., Xiao, Y., et al., 2025, arXiv:2503.10497 (accepted EMNLP 2025).
-  [arXiv](https://arxiv.org/abs/2503.10497) · [Official code](https://github.com/weihao1115/MMLU-ProX)
-  Documents a ~30-point accuracy gap between best- and worst-performing languages on reasoning-focused questions.
+Four multilingual/cross-lingual evaluation benchmarks (XTREME, MMLU-ProX, MedExpQA, PubMedQA) with source, description, application, and links: [`datasets/datasets.md`](datasets/datasets.md)
 
-- **MedExpQA: Multilingual Benchmarking of Large Language Models for Medical Question Answering**
-  Alonso, I., Oronoz, M., & Agerri, R., 2024, Artificial Intelligence in Medicine, 155, 102938. *(Corrected author list — see citation audit: the source paper misattributed this to García-Ferrero et al., the authors of a different paper, "Medical mT5.")*
-  [DOI](https://doi.org/10.1016/j.artmed.2024.102938)
-  First multilingual medical QA benchmark with gold-standard explanations; reports a ~10-point English-to-other-language accuracy drop.
+## Tools and Libraries
 
-- **MlingConf: A Comprehensive Study of Multilingual Confidence Estimation on Large Language Models**
-  Xue, B., Wang, H., Wang, R., Wang, S., Wang, Z., Du, Y., Liang, B., & Wong, K.-F., 2024, arXiv:2402.13606.
-  [arXiv](https://arxiv.org/abs/2402.13606)
-  Documents the "linguistic dominance effect" and the "native-tone prompting effect" in model confidence calibration.
+Five actively maintained tools for multilingual evaluation and retrieval-augmented generation (Transformers, lm-evaluation-harness, LangChain, Haystack, SacreBLEU): [`tools/tools.md`](tools/tools.md)
 
-- **PubMedQA: A Dataset for Biomedical Research Question Answering**
-  Jin, Q., Dhingra, B., Liu, Z., Cohen, W. W., & Lu, X., 2019, EMNLP-IJCNLP 2019, 2567–2577.
-  [ACL Anthology](https://aclanthology.org/D19-1259/)
-  Widely used biomedical QA dataset; relevant baseline for domain-specific factuality evaluation.
+## GitHub Implementations
 
-- **EcomEval: Towards Reliable Evaluation of Large Language Models for Multilingual and Multimodal E-Commerce Applications**
-  Xie, S., Liew, Z., Zhang, H., Zhang, H., Hu, L., Zhou, Z., Liu, S., & Zeng, A., 2025, arXiv:2510.20632.
-  [arXiv](https://arxiv.org/abs/2510.20632)
-  Included as a comparison point for how multilingual reliability evaluation generalizes outside the scientific domain.
+Five implementations tied directly to papers or models discussed in the review (MMLU-ProX, XTREME, LLaMA, mT5, BLOOM training code): [`implementations/github-repositories.md`](implementations/github-repositories.md)
 
-## Applications and Domain Studies
+## Tutorials and Learning Resources
 
-- **The Emergence of Large Language Models as Tools in Literature Reviews: A Large Language Model-Assisted Systematic Review**
-  Scherbakov, D., Hubig, N., Jansari, V., Bakumenko, A., & Lenert, L. A., 2025, JAMIA, 32(6), 1071–1086.
-  [DOI](https://doi.org/10.1093/jamia/ocaf063) · [PMC](https://pmc.ncbi.nlm.nih.gov/articles/PMC12089777/)
-  Large-scale review of 172 studies on LLM-assisted evidence synthesis; motivates the paper's human-in-the-loop recommendation.
+Five authoritative resources for learning multilingual NLP, transformer fine-tuning, and benchmark evaluation: [`tutorials/tutorials.md`](tutorials/tutorials.md)
 
-- **Transforming Literature Screening: The Emerging Role of Large Language Models in Systematic Reviews**
-  Delgado-Chaves, F. M., Jennings, M. J., Atalaia, A., Wolff, J., Horvath, R., Mamdouh, Z. M., Baumbach, J., & Baumbach, L., 2025, Proceedings of the National Academy of Sciences, 122(2), e2411962122. *(Authors added — the source paper's reference list omitted all 8 authors; see citation audit.)*
-  [DOI](https://doi.org/10.1073/pnas.2411962122)
-  Evaluates 18 LLMs on title/abstract screening replication across three systematic reviews.
+## License
 
-- **Capabilities of GPT-4 on Medical Challenge Problems**
-  Nori, H., King, N., McKinney, S. M., Carignan, D., & Horvitz, E., 2023, arXiv:2303.13375.
-  [arXiv](https://arxiv.org/abs/2303.13375)
-  English-language medical benchmark performance used as a comparison point for multilingual medical QA gaps.
-
-- **Towards Building Multilingual Language Model for Medicine**
-  Qiu, P., Wu, C., Zhang, X., Lin, W., Wang, H., Zhang, Y., Wang, Y., & Xie, W., 2024, Nature Communications, 15, 8384.
-  [DOI](https://doi.org/10.1038/s41467-024-52417-z)
-  Introduces MMed-Llama 3; shows targeted multilingual instruction tuning narrows but does not close the reliability gap.
-
-- **Science Across Languages: Assessing LLM Multilingual Translation of Scientific Papers**
-  Kleidermacher, H. C., & Zou, J., 2025, arXiv:2502.17882.
-  [DOI](https://doi.org/10.48550/arXiv.2502.17882)
-  Evaluates full-article translation across 28 languages with JATS XML structure preservation; documents overtranslation and terminology-consistency failures.
-
-- **Low-Resource Cross-Lingual Summarization through Few-Shot Learning with Large Language Models**
-  Park, G., Hwang, S., & Lee, H., 2024, arXiv:2406.04630.
-  [arXiv](https://arxiv.org/abs/2406.04630)
-  Shows few-shot prompting narrows but does not close the summarization quality gap for low-resource target languages.
-
-- **Massively Multilingual Language Models for Cross-Lingual Fact Extraction from Low-Resource Indian Languages**
-  Singh, B., Kandru, P., Sharma, A., & Varma, V., 2023, arXiv:2302.04790.
-  [arXiv](https://arxiv.org/abs/2302.04790)
-  Shows structured fact-extraction lags well behind monolingual English extraction for low-resource Indian languages.
-
-- **The Manifold Costs of Being a Non-Native English Speaker in Science**
-  Amano, T., Ramírez-Castañeda, V., Berdejo-Espinola, V., Borokini, I., Chowdhury, S., et al., 2023, PLOS Biology, 21(7), e3002184.
-  [DOI](https://doi.org/10.1371/journal.pbio.3002184) · [PMID: 37463136](https://pubmed.ncbi.nlm.nih.gov/37463136/)
-  Survey of 908 environmental scientists quantifying the structural costs of non-native English-speaker status in science, motivating the paper's equity framing.
+Repository content (this README, the audit, and the curated resource lists) is released under the [MIT License](LICENSE). Individual linked papers, datasets, and tools retain their own original licenses — see each linked source for details. No copyrighted paper PDFs are redistributed in this repository; only the author's own paper and citation audit are included as files.
